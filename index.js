@@ -186,6 +186,10 @@ function broadcastCommand(data) {
 
 console.log(`WebSocket server running on ws://localhost:${WS_PORT}`);
 
+app.get("/", (req, res) => {
+  res.status(200).json("Welcome to app");
+});
+
 // Simple HTTP endpoint
 app.get("/device", (req, res) => {
   res.status(200).send({ temp: 23, message: "Hello" });
