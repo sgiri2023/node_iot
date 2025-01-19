@@ -203,3 +203,5 @@ app.use("/data-record", dataRecordRoutes);
 app.listen(EXPRESS_PORT, () =>
   console.log("HTTP server running on port", EXPRESS_PORT)
 );
+
+module.exports = app;
