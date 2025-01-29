@@ -186,7 +186,7 @@ function broadcastCommand(data) {
   });
 }
 
-console.log(`WebSocket server running on ws://localhost:${WS_PORT}`);
+// console.log(`WebSocket server running on ws://localhost:${WS_PORT}`);
 
 app.get("/", (req, res) => {
   res.status(200).json("Welcome to app");
