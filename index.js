@@ -13,8 +13,8 @@ const Feature = require("./models/Features"); // Import the Feature model
 const DataRecord = require("./models/DataRecord");
 
 require("dotenv").config();
-const WS_PORT = 8081;
-const EXPRESS_PORT = 4000;
+const EXPRESS_PORT = 8080;
+const WS_PORT = 4000;
 
 const server = new WebSocket.Server({ port: WS_PORT });
 
@@ -163,6 +163,8 @@ async function saveData(data) {
     // Optionally, add the DataRecord reference to the feature and device (if needed)
     feature.dataRecords.push(dataRecord._id);
     feature.lastSeen = Date.now(); // Update the last seen time of the device
+    feature.lastData = sensorData;
+    feature.unit = unit;
     await feature.save();
 
     device.lastSeen = Date.now(); // Update the last seen time of the device
@@ -191,8 +193,8 @@ app.get("/", (req, res) => {
 });
 
 // Simple HTTP endpoint
-app.get("/device", (req, res) => {
-  res.status(200).send({ temp: 23, message: "Hello" });
+app.get("/iot-connect", (req, res) => {
+  res.status(200).send({ temp: 23, message: "Hello, From IOT." });
 });
 
 app.use("/user", UserRoutes);

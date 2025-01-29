@@ -9,6 +9,8 @@ const featureSchema = new mongoose.Schema({
     dataRecords: [{ type: mongoose.Schema.Types.ObjectId, ref: 'DataRecord' }], // Array of references to data records
     lastSeen: { type: Date, default: null },
     createdAt: { type: Date, default: Date.now }, // Timestamp for when the feature was recorded
+    lastData: { type: Number, default: 0.0 }, // Sensor value
+    unit: { type: String, default: '' }, // Unit of the sensor value
 });
 
 const Feature = mongoose.model('Features', featureSchema);

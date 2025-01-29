@@ -42,4 +42,27 @@ router.post('/create', async (req, res) => {
   }
 });
 
+router.get("/:deviceId", async(req, res) => {
+  const { deviceId } = req.params;
+  
+  try {
+    // Find the device by deviceId and populate the features field
+    const device = await Device.findOne({ deviceId })
+        .populate('features')  // Populate the 'features' field with data from the 'Features' collection
+        .exec();
+
+    // If device is not found, send a 404 error
+    if (!device) {
+        return res.status(404).json({ message: 'Device not found' });
+    }
+
+    // Send the device data as a response
+    res.json(device);
+} catch (error) {
+    // Send a 500 error if something goes wrong
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching device', error: error.message });
+}
+})
+
 module.exports = router;
